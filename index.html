@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MiStock Admin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section id="login" class="login-page">
+    <div class="login-card">
+      <div class="logo">▣</div>
+      <h1>MiStock Admin</h1>
+      <p>Panel privado de administración</p>
+
+      <form id="loginForm">
+        <label for="password">Clave de acceso</label>
+        <input
+          id="password"
+          type="password"
+          placeholder="Ingresa tu contraseña"
+          autocomplete="current-password"
+          required
+        >
+        <button id="loginButton" type="submit">
+          Ingresar al sistema
+        </button>
+      </form>
+
+      <p id="loginError" class="error"></p>
+    </div>
+  </section>
+
+  <div id="dashboard" class="dashboard hidden">
+
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">▣</div>
+        <div>
+          <strong>MiStock</strong>
+          <small>ADMINISTRACIÓN</small>
+        </div>
+      </div>
+
+      <nav>
+        <div class="nav-active">◫ &nbsp; Usuarios</div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <span id="adminEmail"></span>
+        <button id="logoutButton" class="logout">
+          Cerrar sesión
+        </button>
+      </div>
+    </aside>
+
+    <main class="main">
+
+      <header class="header">
+        <div>
+          <h1>Panel de administración</h1>
+          <p>Gestiona las cuentas y suscripciones de MiStock</p>
+        </div>
+        <span class="admin-badge">ADMIN</span>
+      </header>
+
+      <section class="stats">
+        <article class="stat-card">
+          <span>Usuarios registrados</span>
+          <strong id="totalUsers">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Usuarios Pro</span>
+          <strong id="proUsers">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Usuarios Básico</span>
+          <strong id="basicUsers">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Próximos a vencer</span>
+          <strong id="expiringUsers">0</strong>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Usuarios registrados</h2>
+            <p>Administra suscripciones y vencimientos.</p>
+          </div>
+          <button id="refreshButton" class="secondary">
+            Actualizar
+          </button>
+        </div>
+
+        <div class="filters">
+          <input
+            id="search"
+            type="search"
+            placeholder="Buscar por nombre o correo..."
+          >
+          <select id="planFilter">
+            <option value="ALL">Todos</option>
+            <option value="PRO">Pro</option>
+            <option value="BASIC">Básico</option>
+          </select>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Plan</th>
+                <th>Vencimiento</th>
+                <th>Administrar</th>
+              </tr>
+            </thead>
+            <tbody id="usersTable"></tbody>
+          </table>
+        </div>
+
+        <p id="listStatus" class="muted"></p>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-heading">
+        <h2>Administrar usuario</h2>
+        <button id="closeModal" class="close">×</button>
+      </div>
+
+      <h3 id="selectedName"></h3>
+      <p id="selectedEmail" class="muted"></p>
+      <p id="selectedPlan"></p>
+
+      <label for="days">Duración de Pro</label>
+      <select id="days">
+        <option value="7">7 días</option>
+        <option value="15">15 días</option>
+        <option value="30" selected>30 días</option>
+        <option value="60">60 días</option>
+        <option value="90">90 días</option>
+      </select>
+
+      <p class="muted">
+        Si ya tiene Pro vigente, los días se sumarán
+        al vencimiento actual.
+      </p>
+
+      <button id="activateButton">
+        Activar / renovar Pro
+      </button>
+
+      <button id="basicButton" class="danger">
+        Cambiar a Básico
+      </button>
+
+      <p id="modalStatus"></p>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
